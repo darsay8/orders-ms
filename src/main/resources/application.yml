@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: orders-ms
+  datasource:
+    url: ${DATASOURCE_URL}
+    username: ${DATASOURCE_USERNAME}
+    password: ${DATASOURCE_PASSWORD}
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    hikari:
+      maximum-pool-size: "10"
+      connection-timeout: "30000"
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.OracleDialect
+    hibernate:
+      ddl-auto: create-drop
+
+server:
+  port: ${PORT}
+logging:
+  level:
+    root: INFO
+    org:
+      hibernate: DEBUG
+      springframework: DEBUG
+
+service:
+  product:
+    url: ${PRODUCT_SERVICE_URL}
+  user:
+    url: ${USER_SERVICE_URL}
