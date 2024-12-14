@@ -43,8 +43,12 @@ public class OrderService {
 
         List<Long> productIds = productRequests.stream()
                 .map(OrderRequest.ProductRequest::getProductId)
-                .collect(Collectors.toList()); // Convert to a list of IDs
+                .collect(Collectors.toList());
         List<Product> products = productService.getProductsByIds(productIds);
+
+        if (products.isEmpty()) {
+            throw new IllegalArgumentException("Product with ID " + productIds.get(0) + " not found");
+        }
 
         Order order = new Order();
         order.setUserId(user.getId());
